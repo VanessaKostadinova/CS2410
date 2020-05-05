@@ -84,7 +84,7 @@
           <b>Request</b>
         </div>
         <div class="card-body">
-          <form method="POST" action="{{ url('requests') }}" enctype="multipart/form-data">
+          <form method="POST" action="{{ action('ItemRequestController@store') }}" enctype="multipart/form-data">
             @csrf
             <table class="table table-striped" border="1" >
               <tr>

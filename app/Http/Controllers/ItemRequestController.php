@@ -121,7 +121,7 @@ class ItemRequestController extends Controller
       'item_requested' => 'required'
     ]);
 
-    $item = Item::where('id', $request->input('item_requested.'))->firstOrFail();
+    $item = Item::where('id', $request->input('item_requested'))->firstOrFail();
 
     //If item does not exist
     if(!$item){
@@ -149,7 +149,7 @@ class ItemRequestController extends Controller
   public function show($request_key){
     $item_request = ItemRequest::where('id', $request_key)->firstOrFail();
     //If the user didn't make it or is not an admin
-    if(Auth::user()->id != $item_request->requested_by | Auth::user()->admin != 1){
+    if(Auth::user()->id != $item_request->requested_by && Auth::user()->admin != 1){
       return redirect('requests')->withErrors(['You cannot perform this action.']);
     }
 

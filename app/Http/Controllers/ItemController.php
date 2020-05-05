@@ -30,7 +30,7 @@ class ItemController extends Controller
       $fileNameWithExt = $request->file('image')->getClientOriginalName();
       $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
       $extension = $request->file('image')->getClientOriginalName();
-      $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+      $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
 
       $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
     }
@@ -45,6 +45,7 @@ class ItemController extends Controller
     $item->description = $request->input('description');
     $item->date_found = $request->input('date_found');
     $item->location_found = $request->input('location_found');
+    $item->image = $fileNameToStore;
     $item->state = 'Open';
     $item->found_by = Auth::user()->id;
 
@@ -124,13 +125,14 @@ class ItemController extends Controller
         $fileNameWithExt = $request->file('image')->getClientOriginalName();
         $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
         $extension = $request->file('image')->getClientOriginalName();
-        $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+        $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
 
         $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
       }
       else{
         $fileNameToStore = 'noimage.jpg';
       }
+      $item->image = $fileNameToStore;
 
       $item->save();
 

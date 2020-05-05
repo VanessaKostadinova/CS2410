@@ -1,11 +1,4 @@
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-.env
-.env.backup
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
+/node_modules /public/hot /public/storage /storage/*.key /vendor .env .env.backup .phpunit.result.cache Homestead.json 
+Homestead.yaml npm-debug.log yarn-error.log /.cache /.filemin /.gnupg /.tmp /cgi-bin /etc /homes /logs /Maildir /tmp 
+/virtualmin-backup .bash_logout .bashrc .profile ssl.ca ssl.cache ssl.cert ssl.combined ssl.everything
+ssl.key

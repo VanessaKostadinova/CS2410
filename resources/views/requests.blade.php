@@ -46,22 +46,25 @@
               <!--For every request-->
               @foreach($item_requests as $item_request)
               <tr>
-                <td>{{ $item_request['itemId'] }}</td>
-                <td>{{ $item_request['userId'] }}</td>
+                <td>{{ $item_request['requested_by'] }}</td>
+                <td>{{ $item_request['item_requested'] }}</td>
                 <td>{{ $item_request['state'] }}</td>
 
                 <td><a href="{{ action('ItemRequestController@show', $item_request['id']) }}" class="btn btn-primary">Details</a></td>
                 <!--If admin did not submit the request and the request has not been resolved -->
-                @if( $item_request->userId != Auth::user()->id && $item_request->state == 'Open' )
-                <td><a href="/requests/{{ $item_request['item_requested'] }}/approve/" class="btn btn-primary">Approve</a></td>
-                <td><a href="/requests/{{ $item_request['item_requested'] }}/deny/" class="btn btn-danger">Reject</a></td>
+                @if( $item_request->requested_by != Auth::user()->id && $item_request->state == 'Open' )
+                <td><a href="/requests/{{ $item_request['id'] }}/Approved" class="btn btn-primary">Approve</a></td>
+                <td><a href="/requests/{{ $item_request['id'] }}/Denied" class="btn btn-danger">Reject</a></td>
                 @endif
                 <!--If request has been resolved-->
                 @if( $item_request->state != 'Open')
-                <form action="{{ action('ItemRequestController@destroy', $item_request['id']) }}" method="POST">@csrf
-                  <input name="_method" type="hidden" value="DELETE">
+                <td>
+                <form action="{{ action('ItemRequestController@destroy', $item_request['id']) }}" method="POST">
+                  @csrf
+                  <input name="_method" type="hidden" value="DELETE" />
                   <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
+                </td>
                 @endif
               </tr>
               @endforeach
