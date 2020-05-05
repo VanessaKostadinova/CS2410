@@ -21,7 +21,8 @@ class ItemController extends Controller
       'colour' => 'required',
       'name' => 'required',
       'date_found' => 'required',
-      'location_found' => 'required'
+      'location_found' => 'required',
+        'image' => 'sometimes|image|mimes:jpg,jpeg,png,gif|max:1024'
     ]);
 
     //If user entered an image
@@ -106,7 +107,8 @@ class ItemController extends Controller
       $this->validate(request(), [
         'name'=>'required',
         'date_found'=>'required',
-        'location_found'=>'required'
+        'location_found'=>'required',
+          'image' => 'sometimes|image|mimes:jpg,jpeg,png,gif|max:1024'
       ]);
 
       $item->name = $request->input('name');
